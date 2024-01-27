@@ -6,6 +6,8 @@ from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+import bcrypt
+
 
 def check(email):
     expression = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
@@ -30,7 +32,16 @@ def register_user():
 
         return {"message": "This field is required"}
     
-    
+    bpassword = bytes(password, 'utf-8')
+    salt = bcrypt.gensalt(12)
+    hashed_password = bcrypt.hashedpassword(password=bpassword, salt=salt)
+    user = User(name, email, hashed_password.decode('utf-8'))
+    db.session.add(user)
+    db.session.commit()
+
+    return {"message": f'user {user.email} was created'}
+
+
 @api.route('/token', methods=['POST'])
 def create_access_token():
 
@@ -42,6 +53,22 @@ def create_access_token():
 
         return {"message": "email address or password incorrect", "authorize": False}, 400    
     
+    if check(email) is not True:
+
+        return {"message": "This email is invalid", "authorize": False}, 400
+    
+    user = User.query.filter_by(email=email).one_or_none()
+    if user is None:
+
+        return {"message": "User not found", "authorize": False}, 400
+    
+    password_byte = bytes(password, 'utf-8')
+    if bcrypt.checkpassword(password_byte, user.password.encode('utf-8')):
+
+        return {"token": create_access_token(identity = email), "authorize": True}, 200
+    
+    return {"message": "Unauthorized", "authorize": False}, 401
+
 
 @api.route('/profile/user')
 @jwt_required()
