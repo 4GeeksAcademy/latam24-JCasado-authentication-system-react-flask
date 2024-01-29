@@ -7,12 +7,13 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 import bcrypt
+import re
 
 
 def check(email):
     expression = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 
-    if(expression.fullmatch(expression, email)):
+    if re.fullmatch(expression, email):
 
         return True
     else:
@@ -24,17 +25,23 @@ api = Blueprint('api', __name__)
 def register_user():
 
     body = request.get_json()
-    name = body.get(name, None)
-    email = body.get(email, None)
-    password = body.get(password, None)
+    name = body.get("name", None)
+    email = body.get("email", None)
+    password = body.get("password", None)
 
     if name is None or email is None or password is None:
 
         return {"message": "This field is required"}
     
     bpassword = bytes(password, 'utf-8')
-    salt = bcrypt.gensalt(12)
-    hashed_password = bcrypt.hashedpassword(password=bpassword, salt=salt)
+    salt = bcrypt.gensalt()
+    
+    print("Salt:", salt)
+   
+    hashed_password = bcrypt.hashpw(bpassword, salt)
+
+    print("Password:", bpassword)
+    
     user = User(name, email, hashed_password.decode('utf-8'))
     db.session.add(user)
     db.session.commit()
@@ -63,7 +70,7 @@ def create_access_token():
         return {"message": "User not found", "authorize": False}, 400
     
     password_byte = bytes(password, 'utf-8')
-    if bcrypt.checkpassword(password_byte, user.password.encode('utf-8')):
+    if bcrypt.checkpw(password_byte, user.password.encode('utf-8')):
 
         return {"token": create_access_token(identity = email), "authorize": True}, 200
     
