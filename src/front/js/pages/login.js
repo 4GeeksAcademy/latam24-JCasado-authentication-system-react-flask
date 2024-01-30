@@ -21,7 +21,7 @@ export const Login = () => {
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <label htmlFor="inputEmail" className="form-label">Email</label>
+                    <label htmlFor="inputEmail" className="form-label">@Email</label>
                     <input type="text" name="email" id="inputEmail" className="form-control" aria-describedby="emailHelpBlock" onChange={(event) => { handleChange(event) }} />
                     <div id="emailHelpBlock" className="form-text">
                         Please use a valid email
@@ -30,7 +30,7 @@ export const Login = () => {
 
                     <input type="password" name="password" id="inputPassword5" className="form-control" aria-describedby="passwordHelpBlock" onChange={ handleChange } />
                     <div id="passwordHelpBlock" className="form-text">
-                        Use a valid password
+                        Please use a valid password
                     </div>
 
                     <button className="btn btn-primary" onClick={async() => {

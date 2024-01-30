@@ -1,12 +1,12 @@
 
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
 
 	const { store, actions } = useContext(Context);
-	const navigate = navigate();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 
@@ -22,7 +22,7 @@ export const Navbar = () => {
 
 	return (
 
-		<nav className="navbar navbar-light bg-dark">
+		<nav className="navbar navbar-dark bg-dark">
 			<div className="container">
 				<Link to="/">
 					<span className="navbar-brand mb-0 h1">Home</span>
