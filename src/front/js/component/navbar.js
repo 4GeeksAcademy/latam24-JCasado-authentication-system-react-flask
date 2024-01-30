@@ -1,22 +1,27 @@
+
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+
 	const { store, actions } = useContext(Context);
-	const navigate = useNavigate();
+	const navigate = navigate();
 
 	useEffect(() => {
+
 		console.log("Navbar");
 
 	}, [store.token]);
 
 	const handleClick = () => {
+
 		!store.token && navigate("/login");
 		actions.logOut();
 	};
 
 	return (
+
 		<nav className="navbar navbar-light bg-dark">
 			<div className="container">
 				<Link to="/">

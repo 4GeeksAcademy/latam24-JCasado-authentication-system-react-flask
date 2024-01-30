@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +24,7 @@ export const Login = () => {
                     <label htmlFor="inputEmail" className="form-label">Email</label>
                     <input type="text" name="email" id="inputEmail" className="form-control" aria-describedby="emailHelpBlock" onChange={(event) => { handleChange(event) }} />
                     <div id="emailHelpBlock" className="form-text">
-                        Use a valid email
+                        Please use a valid email
                     </div>
                     <label htmlFor="inputPassword5" className="form-label">Password</label>
 
