@@ -49,7 +49,7 @@ def register_user():
     return {"message": f'user {user.email} was created'}
 
 
-@api.route('/token', methods=['POST'])
+@api.route('/login', methods=['POST'])
 def create_access_token():
 
     body = request.get_json()
@@ -64,15 +64,17 @@ def create_access_token():
 
         return {"message": "This email is invalid", "authorize": False}, 400
     
-    user = User.query.filter_by(email=email).one_or_none()
+    user = User.query.filter_by(email=email).fisrt()
+
     if user is None:
 
         return {"message": "User not found", "authorize": False}, 400
     
     password_byte = bytes(password, 'utf-8')
+
     if bcrypt.checkpw(password_byte, user.password.encode('utf-8')):
 
-        return {"token": create_access_token(identity = email), "authorize": True}, 200
+        return {"token": create_access_token(identity=email), "authorize": True}, 200
     
     return {"message": "Unauthorized", "authorize": False}, 401
 

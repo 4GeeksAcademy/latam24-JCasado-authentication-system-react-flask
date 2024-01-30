@@ -38,7 +38,7 @@ export const Login = () => {
                         if ( await actions.makeLogin(data)){
                             navigate("/")
                         }
-                     }}>Sign Up
+                     }}>Login
                     </button>
                 </div>
             </div>
