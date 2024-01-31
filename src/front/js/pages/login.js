@@ -36,7 +36,7 @@ export const Login = () => {
                     <button className="btn btn-primary" onClick={async () => {
 
                         if (await actions.makeLogin(data)) {
-                            navigate("/")
+                            navigate("/private")
                         }
                     }}> Login
                     </button>

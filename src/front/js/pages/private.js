@@ -8,3 +8,5 @@ export const Private = () => {
         
         )
 };
+
+// Confirmar el token para saber si existe, de lo contrario enviar al Login.

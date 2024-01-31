@@ -1,11 +1,12 @@
 
-import React, { useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Context } from "../store/appContext";
+import React, { useContext, useEffect} from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Context } from '../store/appContext';
 
 export const Navbar = () => {
 
 	const { store, actions } = useContext(Context);
+
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -16,12 +17,18 @@ export const Navbar = () => {
 
 	const handleClick = () => {
 
-		!store.token && navigate("/login");
-		actions.logOut();
+		if (store.token) {
+
+			actions.logOut();
+
+		} else {
+			
+			navigate("/login");
+		}
 	};
 
 	return (
-
+		
 		<nav className="navbar navbar-dark bg-dark">
 			<div className="container">
 				<Link to="/">
@@ -33,11 +40,15 @@ export const Navbar = () => {
 					</Link>
 				)}
 				<div className="ml-auto">
-					<Link to="/Login">
-						{store.token ? "Logout" : "Login"}
-					</Link>
-					<Link to="/Register">
-						{store.token ? "Logout" : "Register"}
+					{store.token ? (
+						<button className="btn btn-primary" onClick={handleClick}>Logout</button>
+					) : (
+						<Link to="/login">
+							<button className="btn btn-primary">Login</button>
+						</Link>
+					)}
+					<Link to="/register">
+						<button className="btn btn-primary">Register</button>
 					</Link>
 				</div>
 			</div>

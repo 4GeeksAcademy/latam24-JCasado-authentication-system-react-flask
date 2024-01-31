@@ -37,7 +37,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 						return false
 					}
-					const body = await response.json()
+
+					const data = await response.json()
+
+					setStore({ "store": data.token })
+					
+					console.log(data)
 
 					return true
 				}
