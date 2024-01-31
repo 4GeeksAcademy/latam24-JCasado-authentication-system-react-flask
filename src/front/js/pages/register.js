@@ -40,10 +40,10 @@ export const Register = () => {
 
                         <button className="btn btn-primary" onClick={async () => {
 
-                            if (await actions.makeLogin(data)) {
+                            if (await actions.newUser(data)) {
                                 navigate("/Login")
                             }
-                        }}>Register
+                        }}> Register
                         </button>
                     </div>
                 </div>

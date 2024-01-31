@@ -31,7 +31,7 @@ def register_user():
 
     if name is None or email is None or password is None:
 
-        return {"message": "This field is required"}
+        return {"message": "This field is required"}, 400
     
     bpassword = bytes(password, 'utf-8')
     salt = bcrypt.gensalt()
@@ -44,13 +44,22 @@ def register_user():
     
     user = User(name, email, hashed_password.decode('utf-8'))
     db.session.add(user)
-    db.session.commit()
+    
+    try: 
 
-    return {"message": f'user {user.email} was created'}
+        db.session.commit()
+
+
+        return {"message": f'user {user.email} was created'}, 201
+    
+    except Exception as error:
+        print(error)
+    
+        return {"error": "Internal server error", "authorize": False}, 500
 
 
 @api.route('/login', methods=['POST'])
-def create_access_token():
+def login():
 
     body = request.get_json()
     email = body.get('email', None)
@@ -64,7 +73,7 @@ def create_access_token():
 
         return {"message": "This email is invalid", "authorize": False}, 400
     
-    user = User.query.filter_by(email=email).fisrt()
+    user = User.query.filter_by(email=email).first()
 
     if user is None:
 
@@ -74,7 +83,9 @@ def create_access_token():
 
     if bcrypt.checkpw(password_byte, user.password.encode('utf-8')):
 
-        return {"token": create_access_token(identity=email), "authorize": True}, 200
+        token = create_access_token(identity=email)
+
+        return {"token": token}, 200
     
     return {"message": "Unauthorized", "authorize": False}, 401
 

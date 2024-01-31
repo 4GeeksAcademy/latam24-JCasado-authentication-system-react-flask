@@ -32,16 +32,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db, compare_type=True)
 db.init_app(app)
 
-app.config["JWT_SECRET_KEY"]=os.environ.get("JWT_SECRET_KEY")
-MIGRATE = Migrate(app, db)
+app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
 
 jwt_extended = JWTManager(app)
 
 # add the admin
 setup_admin(app)
-
-# add the admin
-setup_commands(app)
 
 # Add all endpoints form the API with a "api" prefix
 app.register_blueprint(api, url_prefix='/api')

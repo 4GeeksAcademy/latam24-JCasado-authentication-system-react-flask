@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
 
-    const { store, actions } = useContext( Context )
+    const { store, actions } = useContext(Context)
     const navigate = useNavigate()
-    const [ data, setData ] = useState({})
+    const [data, setData] = useState({})
     const handleChange = (event) => {
 
         setData({
@@ -16,7 +16,7 @@ export const Login = () => {
         })
     }
 
-    return(
+    return (
 
         <div className="container">
             <div className="row">
@@ -28,17 +28,17 @@ export const Login = () => {
                     </div>
                     <label htmlFor="inputPassword5" className="form-label">Password</label>
 
-                    <input type="password" name="password" id="inputPassword5" className="form-control" aria-describedby="passwordHelpBlock" onChange={ handleChange } />
+                    <input type="password" name="password" id="inputPassword5" className="form-control" aria-describedby="passwordHelpBlock" onChange={handleChange} />
                     <div id="passwordHelpBlock" className="form-text">
                         Please use a valid password
                     </div>
 
-                    <button className="btn btn-primary" onClick={async() => {
+                    <button className="btn btn-primary" onClick={async () => {
 
-                        if ( await actions.makeLogin(data)){
+                        if (await actions.makeLogin(data)) {
                             navigate("/")
                         }
-                     }}>Login
+                    }}> Login
                     </button>
                 </div>
             </div>
