@@ -15,7 +15,7 @@ export const Home = () => {
 			<p>
 				<img src={jcasadoImageUrl} style={{ width: "300px", height: "auto"}}/>	
 			</p>
-			<div className="alert alert-info bg-dark">
+			<div className="alert alert-info">
 				{store.message || "Loading message from the backend (make sure your python backend is running)"}
 			</div>
 			<p>

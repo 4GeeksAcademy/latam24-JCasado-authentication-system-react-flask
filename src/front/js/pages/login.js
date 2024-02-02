@@ -18,7 +18,7 @@ export const Login = () => {
 
     return (
 
-        <div className="container bg-dark text-light">
+        <div className="container">
             <div className="row">
                 <div className="col mt-3">
                     <label htmlFor="inputEmail" className="form-label">@Email</label>

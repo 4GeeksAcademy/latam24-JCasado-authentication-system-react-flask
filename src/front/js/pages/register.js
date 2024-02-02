@@ -17,7 +17,7 @@ export const Register = () => {
 
     return (
 
-        <div className="container bg-dark text-light">
+        <div className="container">
             <div className="row">
                 <div className="col mt-4">
                     <label htmlFor="inputEmail" className="form-label">Name</label>
