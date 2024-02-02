@@ -11,7 +11,7 @@ export const Home = () => {
 	return (
 		
 		<div className="text-center mt-5">
-			<h1>Hello!</h1>
+			<h1>Welcome</h1>
 			<p>
 				<img src={jcasadoImageUrl} style={{ width: "300px", height: "auto"}}/>	
 			</p>
@@ -19,9 +19,8 @@ export const Home = () => {
 				{store.message || "Loading message from the backend (make sure your python backend is running)"}
 			</div>
 			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://start.4geeksacademy.com/starters/react-flask">
-					Read documentation
+				To receive further information contact the service provider here:{" "}
+				<a href="https://www.linkedin.com/in/giorgiocasado/">
 				</a>
 			</p>
 		</div>
