@@ -30,9 +30,9 @@ export const Navbar = () => {
 	return (
 		
 		<nav className="navbar navbar-dark bg-dark">
-			<div className="container">
+			<div className="container d-flex">
 				<Link to="/">
-					<span className="navbar-brand mb-0 h1">Home</span>
+					<button className=" btn btn-primary mb-0 h1">Home</button>
 				</Link>
 				{store.token && (
 					<Link to="/private">
@@ -48,7 +48,7 @@ export const Navbar = () => {
 						</Link>
 					)}
 					<Link to="/register">
-						<button className="btn btn-primary">Register</button>
+						<button className="btn btn-primary mx-4">Register</button>
 					</Link>
 				</div>
 			</div>

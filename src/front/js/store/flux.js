@@ -14,7 +14,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+
+			token: null
+
 		},
 
 		actions: {
@@ -40,7 +43,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					const data = await response.json()
 
-					setStore({ "store": data.token })
+					setStore({ token: data.token })
 					
 					console.log(data)
 
@@ -49,6 +52,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				catch (error) {
 
 					console.log(error)
+				}
+			},
+
+			logOut: () => {
+
+				try {
+					
+					setStore({ token: null });
+			
+					console.log("Youve been logged out");
+
+				} catch (error) {
+
+					console.error("Error closing session:", error);
 				}
 			},
 
