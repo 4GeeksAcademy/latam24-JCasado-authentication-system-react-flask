@@ -11,11 +11,11 @@ export const Home = () => {
 	return (
 		
 		<div className="text-center mt-5">
-			<h1>Welcome</h1>
+			<h1><strong>Welcome</strong></h1>
 			<p>
 				<img src={jcasadoImageUrl} style={{ width: "300px", height: "auto"}}/>	
 			</p>
-			<div className="alert alert-info">
+			<div className="alert alert-info bg-dark">
 				{store.message || "Loading message from the backend (make sure your python backend is running)"}
 			</div>
 			<p>
